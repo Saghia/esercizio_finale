@@ -34,6 +34,7 @@ const setErrorMessagge = (message, error = true) => {
   errorMessage.innerText = message;
   setTimeout(function () {
     errorMessage.innerText = "";
+    errorMessage.className = "hidden";
   }, 3000);
 };
 
@@ -110,10 +111,10 @@ const getReservationsMade = () => {
   reservationsMade = JSON.parse(localReserv);
   if (reservationsMade.length) {
     let lista = reservationsStoric.querySelector("ul");
-    reservationsMade.forEach((r) => {
+    reservationsMade.forEach((reservation) => {
       let elemento = document.createElement("li");
       elemento.className = "list-group-item";
-      elemento.innerText = `Prenotazione per ${elemento.numero_persone} alle ${elemento.ora} del ${elemento.data} `;
+      elemento.innerText = `Prenotazione per ${reservation.numero_persone} alle ${reservation.ora} del ${reservation.data} `;
       lista.appendChild(elemento);
     });
     reservationsStoric.classList.remove("hidden");
