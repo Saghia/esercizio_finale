@@ -1,20 +1,18 @@
 const reservationTime = document.getElementById("reservationTime");
 const reservationData = document.getElementById("reservationData");
 const reservationPeople = document.getElementById("reservationPeople");
-const reservationCheck = document.getElementById("reservationCheck");
+
 const reservationCheckSection = document.getElementById(
   "reservationCheckSection"
 );
-const reservationConfirm = document.getElementById("reservationConfirm");
+const reservationCheck = document.getElementById("reservationCheck");
 const reservationConfirmSection = document.getElementById(
   "reservationConfirmSection"
 );
-const errorMessage = document.getElementById("errorMessage");
-const reservationsStoric = document.getElementById("reservationsStoric");
-let disponibile = false;
+const reservationConfirm = document.getElementById("reservationConfirm");
 
+let disponibile = false;
 const endpoint = "http://localhost:8000/";
-let reservationsMade = [];
 
 reservationCheck.addEventListener("click", () => {
   checkReservation();
@@ -23,20 +21,6 @@ reservationCheck.addEventListener("click", () => {
 reservationConfirm.addEventListener("click", () => {
   confirmReservation();
 });
-
-const setErrorMessagge = (message, error = true) => {
-  if (error) {
-    errorMessage.classList.add("text-danger");
-  } else {
-    errorMessage.classList.add("text-success");
-  }
-  errorMessage.classList.remove("hidden");
-  errorMessage.innerText = message;
-  setTimeout(function () {
-    errorMessage.innerText = "";
-    errorMessage.className = "hidden";
-  }, 3000);
-};
 
 const checkReservation = async () => {
   reservationCheck.innerText = "Verifica in corso...";
@@ -55,17 +39,17 @@ const checkReservation = async () => {
   if (response.status == "200") {
     reservationCheck.innerText = "Verifica";
     reservationCheck.removeAttribute("disabled");
-    reservationConfirmSection.classList.remove("hidden");
-    reservationCheckSection.classList.add("hidden");
+    reservationConfirmSection.classList.remove("d-none");
+    reservationCheckSection.classList.add("d-none");
     const responseJSON = await response.json();
     console.log(responseJSON);
     disponibile = true;
   } else {
-    setErrorMessagge(
-      "Spiacente, in questa fascia oraria di questo giorno siamo pieni"
-    );
     reservationCheck.innerText = "Verifica";
     reservationCheck.removeAttribute("disabled");
+    alert(
+      "Purtroppo in questa fascia oraria di questo giorno esiste già una prenotazione"
+    );
   }
 };
 
@@ -90,35 +74,15 @@ async function confirmReservation() {
   if (responseJSON.detail == "Tavolo Prenotato") {
     reservationConfirm.innerText = "Prenota";
     reservationConfirm.removeAttribute("disabled");
-    reservationConfirmSection.classList.add("hidden");
+    reservationConfirmSection.classList.add("d-none");
     reservationsMade.push({
       data: reservationData.value,
       ora: reservationTime.value,
       numero_persone: reservationPeople.value,
     });
-    localStorage.setItem("prenotazioni", JSON.stringify(reservationsMade));
-    setErrorMessagge(
-      "Prenotazione confermata. La pagina si ricaricherà a breve"
-    );
     setTimeout(() => {
       window.location.reload();
     }, 2000);
+    alert("PRENOTAZIONE AVVENUTA CON SUCCESSO!");
   }
 }
-
-const getReservationsMade = () => {
-  let localReserv = localStorage.getItem("prenotazioni");
-  reservationsMade = JSON.parse(localReserv);
-  if (reservationsMade.length) {
-    let lista = reservationsStoric.querySelector("ul");
-    reservationsMade.forEach((reservation) => {
-      let elemento = document.createElement("li");
-      elemento.className = "list-group-item";
-      elemento.innerText = `Prenotazione per ${reservation.numero_persone} alle ${reservation.ora} del ${reservation.data} `;
-      lista.appendChild(elemento);
-    });
-    reservationsStoric.classList.remove("hidden");
-  }
-};
-
-window.addEventListener("load", getReservationsMade);

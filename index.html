@@ -51,8 +51,8 @@
         data-bs-target="#carosello"
         data-bs-slide="prev"
       >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+        <span class="carousel-control-prev-icon" aria-d-none="true"></span>
+        <span class="visually-d-none">Previous</span>
       </button>
       <button
         class="carousel-control-next"
@@ -60,8 +60,8 @@
         data-bs-target="#carosello"
         data-bs-slide="next"
       >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
+        <span class="carousel-control-next-icon" aria-d-none="true"></span>
+        <span class="visually-d-none">Next</span>
       </button>
     </div>
     <section id="reservation" class="container my-5">
@@ -86,7 +86,6 @@
       <hr />
       <div id="reservation-form">
         <!-- VERIFICA DISPONIBILITA' -->
-        <p class="hidden" id="errorMessage"></p>
         <div
           id="reservationCheckSection"
           class="row px-3 px-md-0 justify-content-center"
@@ -125,7 +124,7 @@
         <!-- CONFERMA PRENOTAZIONE -->
         <div
           id="reservationConfirmSection"
-          class="row px-3 px-md-0 align-items-center flex-column hidden"
+          class="row px-3 px-md-0 align-items-center flex-column d-none"
         >
           <div class="col-12 my-3">
             <h3 class="text-center">Prenota il tuo tavolo</h3>
@@ -152,15 +151,6 @@
               Prenota
             </button>
           </div>
-        </div>
-      </div>
-    </section>
-    <!-- STORICO PRENOTAZIONI -->
-    <section id="reservationsStoric" class="">
-      <div class="container">
-        <div class="row justify-content-center">
-          <h4>Ultime prenotazioni effettuate da questo pc:</h4>
-          <ul class="list-group"></ul>
         </div>
       </div>
     </section>

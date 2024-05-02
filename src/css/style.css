@@ -13,10 +13,6 @@ p {
     font-size: 2rem;
 }
 
-.hidden {
-    display: none;
-}
-
 @media screen and (min-width: 992px) {
     #carosello {
         height: 40vh;
