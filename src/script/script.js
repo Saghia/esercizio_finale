@@ -11,7 +11,7 @@ const reservationConfirmSection = document.getElementById(
 );
 const errorMessage = document.getElementById("errorMessage");
 const reservationsStoric = document.getElementById("reservationsStoric");
-const disponibile = false;
+let disponibile = false;
 
 const endpoint = "http://localhost:8000/";
 let reservationsMade = [];
@@ -30,6 +30,7 @@ const setErrorMessagge = (message, error = true) => {
   } else {
     errorMessage.classList.add("text-success");
   }
+  errorMessage.classList.remove("hidden");
   errorMessage.innerText = message;
   setTimeout(function () {
     errorMessage.innerText = "";
@@ -118,3 +119,5 @@ const getReservationsMade = () => {
     reservationsStoric.classList.remove("hidden");
   }
 };
+
+window.addEventListener("load", getReservationsMade);

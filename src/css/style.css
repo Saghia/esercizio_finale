@@ -22,7 +22,5 @@ p {
         height: 40vh;
         overflow: hidden;
     }
-    #reservation-form {
-        height: 100vh;
-    }
+
 }
