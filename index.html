@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="src/css/style.css" />
   </head>
   <body>
-    <nav class="navbar bg-body-tertiary">
+    <nav class="navbar bg-body-tertiary sticky-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <img
@@ -86,6 +86,7 @@
       <hr />
       <div id="reservation-form">
         <!-- VERIFICA DISPONIBILITA' -->
+        <p class="hidden" id="errorMessage"></p>
         <div
           id="reservationCheckSection"
           class="row px-3 px-md-0 justify-content-center"
@@ -133,7 +134,13 @@
             <label for="reservationOrario" class="form-label"
               >In quanti sarete?</label
             >
-            <input type="number" class="form-control" min="1" required />
+            <input
+              type="number"
+              class="form-control"
+              min="1"
+              required
+              id="reservationPeople"
+            />
           </div>
 
           <div class="col-12 col-md-4 my-2">
@@ -147,6 +154,11 @@
           </div>
         </div>
       </div>
+    </section>
+    <!-- STORICO PRENOTAZIONI -->
+    <section id="reservationsStoric" class="hidden">
+      <h4>Ultime prenotazioni effettuate da questo pc:</h4>
+      <ul></ul>
     </section>
   </body>
 
